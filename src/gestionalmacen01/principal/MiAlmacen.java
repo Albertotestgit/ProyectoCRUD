@@ -172,7 +172,7 @@ public class MiAlmacen
     
     // Listado de todos los productos
     private static void listar(){        
-         System.out.println("<LISTAR>");
+         System.out.println("<LISTAR TODOS LOS PRODUCTOS>");
          almacen.imprimirProductosTodos();
          
     }
