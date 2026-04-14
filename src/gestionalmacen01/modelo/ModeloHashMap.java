@@ -20,51 +20,61 @@ public class ModeloHashMap implements ModeloAbs
        mapa=new HashMap  <Integer,Producto>();
     }
 
-	@Override
-	public boolean insertarProducto(Producto p) {
-		mapa.put(p.codigo, p);
-		return true;
+    public boolean insertarProducto ( Producto p){
+      assert ( p != null ); // No permito productos nulos  
+      mapa.put(p.getCodigo(),p);
+      return true;
+    }
+ 
+    public boolean borrarProducto ( int codigo ){
+      // Si es null es que no estaba
+      return ( mapa.remove(codigo) != null);
+    }
+    
+    public Producto buscarProducto ( int codigo) {
+        return mapa.get(codigo);
+    }
+    // Funciona pero no es una solución independiente del la mécanismo de salida.
+    // El acceso a datos debe ser independiente de la visualización de los mismos.
+    public void listarProductosTodos (){
+        int i = 1;
+        for (Producto p: mapa.values()) {
+            System.out.println(" Nº "+i+" "+p);
+            i++;
+        }
+        
+        //mapa.values().forEach(p-> System.out.println(p));
+    }
+
+    // Devuelvo una lista con los productos con stock mínimo
+    // Será el programa principal quien se encargue de mostrarlos
+	public List<Producto> listarProductosStockMin() {
+	    List <Producto> resu1 = new ArrayList<Producto>();
+	    for (Producto p: mapa.values()) {
+	    	if ( p.getStock() <= p.getStock_min()) {
+				resu1.add(p);
+			}
+        }
+	 // Otra forma: Crea una nueva lista a partir de los valores y borro los que supera el stock mínimo
+	 List <Producto> resu2 = new ArrayList<Producto>(mapa.values());
+	 // Elimino los que superan el mínimo
+	 resu2.removeIf(p -> (p.getStock() > p.getStock_min()));
+	 
+	 return resu1;
+	}
+
+	// Solo chequea si el producto ya existia en el almacen.
+    // No tiene que hacer nada pues se ha cambiado la referencia
+	public boolean modificarProducto(Producto pro) {
+		return mapa.containsValue(pro);
 	}
 
 	@Override
-	public boolean borrarProducto(int codigo) {
-		 return (mapa.remove(codigo)!= null);
-	}
-
-	@Override
-	public boolean modificarProducto(Producto nuevo) {
-		return ( mapa.containsKey(nuevo.codigo));
-	}
-
-	@Override
-	public Producto buscarProducto(int codigo) {
-		return mapa.get(codigo);
-	}
-
-	@Override
-	public void imprimirProductosTodos() {
-		for ( Producto p: mapa.values()) {
-			System.out.println(p);
-		}
-		
-	}
-
-	@Override
-	public List<Producto> obtenerProductos() {
+	public List<Producto> obtenerTodos() {
 		// TODO Auto-generated method stub
 		return new ArrayList<Producto>(mapa.values());
 	}
-
-	@Override
-	public List<Producto> obtenerProductosStockMin() {
-		var listaStockMin = new ArrayList<Producto>();
-		for ( Producto p: mapa.values()) {
-		   if ( p.stock <= p.stock_min) {
-			   listaStockMin.add(p);
-		   }
-		}
-		
-		return listaStockMin;
-	}
+    
+    
     
 }

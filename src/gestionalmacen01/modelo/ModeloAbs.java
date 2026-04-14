@@ -5,7 +5,7 @@ import java.util.List;
  * Abstract class ModeloAbs - Clase de acceso a Modelo de DATOS
  * 
  * @author: Alberto Lopez
- * Date: 24/03/2026
+ * Date: 24/04/2018
  */
 public interface  ModeloAbs
 {
@@ -14,17 +14,15 @@ public interface  ModeloAbs
     
     boolean borrarProducto ( int codigo );
     
-    boolean modificarProducto (Producto nuevo);
-    
     public Producto buscarProducto ( int codigo);
     
-    void imprimirProductosTodos ();
+    void listarProductosTodos ();
     
-    List <Producto> obtenerProductos(); 
+    List <Producto> listarProductosStockMin();
     
-    List <Producto> obtenerProductosStockMin();
+    boolean modificarProducto (Producto nuevo);
     
-    
+    List<Producto> obtenerTodos(); 
     
     
 }
