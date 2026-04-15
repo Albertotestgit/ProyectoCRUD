@@ -17,7 +17,7 @@ public class AlmacenGUI extends JFrame {
 
 	public AlmacenGUI() {
 		// Inicialización del modelo (usando ArrayList por defecto)
-		almacen = new ModeloArrayList();
+		almacen = new ModeloHashMap();
 
 		// --- 1. CARGAR DATOS DE PRUEBA ---
 		cargarDatosPrueba();
